@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.app.pokedexapp"
+    namespace = "com.app.movil_examen"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.app.pokedexapp"
+        applicationId = "com.app.movil_examen"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
