@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface CountryApiService {
-    @GET("all?fields=name")
+    @GET("all?fields=name,flags")
     suspend fun getCountryList(): List<CountriesResponse>
 
     @GET("name/{name}")

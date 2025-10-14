@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ import com.app.movil_examen.presentation.screens.Home.components.CountryListCont
 @Composable
 fun HomeScreen(
     onCountryClick: (String) -> Unit,
+    onReqsClick: () -> Unit,
     viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
     var selectedTabIndex by remember { mutableStateOf(0) }
@@ -36,7 +38,7 @@ fun HomeScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     // Filtrar personajes según la búsqueda
-    val filteredMovies =
+    val filteredCountries =
         uiState.countryList.filter { country ->
             country.name.contains(searchQuery, ignoreCase = true)
         }
@@ -44,7 +46,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Movies") },
+                title = { Text("Countries") },
             )
         },
     ) { padding ->
@@ -58,7 +60,7 @@ fun HomeScreen(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                placeholder = { Text("Seach movie...") },
+                placeholder = { Text("Seach country...") },
                 leadingIcon = {
                     Icon(Icons.Default.Search, contentDescription = "Search")
                 },
@@ -69,11 +71,20 @@ fun HomeScreen(
                 singleLine = true,
             )
 
+            Button(
+                onClick = onReqsClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text("Go to Reqs screen")
+            }
+
             // Character List
             when (selectedTabIndex) {
                 0 ->
                     CountryListContent(
-                        countryList = filteredMovies,
+                        countryList = filteredCountries,
                         isLoading = uiState.isLoading,
                         error = uiState.error,
                         onCountryClick = onCountryClick,

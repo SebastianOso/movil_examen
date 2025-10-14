@@ -47,17 +47,17 @@ fun CountryCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
         ) {
-            //AsyncImage(
-                //model = movie.image,
-                //contentDescription = movie.title,
-            //    modifier =
-            //        Modifier
-            //            .size(140.dp)
-            //            .background(
-            //                color = Color.White.copy(alpha = 0.2f),
-            //                shape = RoundedCornerShape(12.dp),
-            //            ).padding(8.dp),
-            //)
+            AsyncImage(
+                model = country.flag,
+                contentDescription = country.name,
+                modifier =
+                    Modifier
+                        .size(140.dp)
+                        .background(
+                            color = Color.White.copy(alpha = 0.2f),
+                            shape = RoundedCornerShape(12.dp),
+                        ).padding(8.dp),
+            )
 
             Text(
                 text = country.name,

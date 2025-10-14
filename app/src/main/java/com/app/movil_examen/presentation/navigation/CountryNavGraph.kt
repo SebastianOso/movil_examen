@@ -9,8 +9,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.app.movil_examen.presentation.screens.Detail.DetailScreen
-import com.app.movil_examen.presentation.screens.Home.HomeScreen
+import com.app.movil_examen.presentation.screens.reqs.ReqsScreen
 
+import com.app.movil_examen.presentation.screens.Home.HomeScreen
 sealed class Screen(
     val route: String,
 ) {
@@ -19,6 +20,8 @@ sealed class Screen(
     object Detail : Screen("name/{countryName}") {
         fun createRoute(countryName: String) = "name/$countryName"
     }
+
+    object Reqs : Screen("reqs")
 }
 
 @Suppress("ktlint:standard:function-naming")
@@ -37,6 +40,9 @@ fun CountryNavGraph(
                 onCountryClick = { movieId ->
                     navController.navigate(Screen.Detail.createRoute(movieId))
                 },
+                onReqsClick = {
+                    navController.navigate(Screen.Reqs.route)
+                }
             )
         }
 
@@ -49,6 +55,10 @@ fun CountryNavGraph(
                 countryName = countryName,
                 onBackClick = { navController.popBackStack() },
             )
+        }
+
+        composable(route = Screen.Reqs.route) {
+            ReqsScreen()
         }
 
     }

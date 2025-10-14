@@ -21,5 +21,5 @@ fun CountriesResponse.toDomain(): Country =
         region = "N/A",
         currency = "N/A",
         languages = "N/A",
-        flag = "N/A"
+        flag = flags?.png
     )
