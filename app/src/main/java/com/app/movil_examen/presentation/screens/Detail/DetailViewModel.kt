@@ -1,10 +1,8 @@
-package com.app.movil_examen.presentation.screens.Home
+package com.app.movil_examen.presentation.screens.Detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.movil_examen.domain.common.Result
-import com.app.movil_examen.domain.usecase.GetCountriesStory
-import com.app.movil_examen.presentation.screens.Home.HomeUiState
+import com.app.movil_examen.domain.usecase.GetCountryStory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,24 +10,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.app.movil_examen.domain.common.Result
 
-@Suppress("ktlint:standard:class-naming")
 @HiltViewModel
-class HomeScreenViewModel
+class DetailViewModel
 @Inject
 constructor(
-    private val getCountriesStory: GetCountriesStory,
+    private val getCountryStory: GetCountryStory,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(DetailUiState())
+    val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
-    init {
-        loadCountryList()
-    }
-
-    private fun loadCountryList() {
+    fun getCountry(id: String) {
         viewModelScope.launch {
-            getCountriesStory().collect { result ->
+            getCountryStory(id).collect { result ->
                 _uiState.update { state ->
                     when (result) {
                         is Result.Loading ->
@@ -38,7 +32,7 @@ constructor(
                             )
                         is Result.Success ->
                             state.copy(
-                                countryList = result.data,
+                                country = result.data,
                                 isLoading = false,
                                 error = null,
                             )

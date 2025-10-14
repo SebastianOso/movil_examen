@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.app.movil_examen.presentation.screens.Detail.DetailScreen
 import com.app.movil_examen.presentation.screens.Home.HomeScreen
 
 sealed class Screen(
@@ -15,8 +16,8 @@ sealed class Screen(
 ) {
     object Home : Screen("home")
 
-    object Detail : Screen("films/{movieId}") {
-        fun createRoute(movieId: String) = "films/$movieId"
+    object Detail : Screen("name/{countryName}") {
+        fun createRoute(countryName: String) = "name/$countryName"
     }
 }
 
@@ -39,6 +40,16 @@ fun CountryNavGraph(
             )
         }
 
+        composable(
+            route = Screen.Detail.route,
+            arguments = listOf(navArgument("countryName") { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val countryName = backStackEntry.arguments?.getString("countryName") ?: "Mexico"
+            DetailScreen(
+                countryName = countryName,
+                onBackClick = { navController.popBackStack() },
+            )
+        }
 
     }
 }
