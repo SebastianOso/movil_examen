@@ -1,5 +1,8 @@
 package com.app.movil_examen.di
 
+import com.app.movil_examen.data.remote.api.CountryApiService
+import com.app.movil_examen.data.repository.CountryRepositoryImpl
+import com.app.movil_examen.domain.repository.CountryRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
