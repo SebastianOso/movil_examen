@@ -21,9 +21,9 @@ constructor(
     private val _uiState = MutableStateFlow(DetailUiState())
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
-    fun getCountry(id: String) {
+    fun getCountry(name: String) {
         viewModelScope.launch {
-            getCountryStory(id).collect { result ->
+            getCountryStory(name).collect { result ->
                 _uiState.update { state ->
                     when (result) {
                         is Result.Loading ->
