@@ -13,4 +13,18 @@ data class CountryDto(
     val currency: CurrencyDto,
     @SerializedName("languages")
     val languages: Map<String, String>? = null,
-)
+) {
+    data class CountryNameDto(
+        @SerializedName("common")
+        val common: String,
+        @SerializedName("official")
+        val official: String? = null,
+    )
+
+    data class CurrencyDto(
+        @SerializedName("symbol")
+        val symbol: String? = null,
+        @SerializedName("name")
+        val name: String? = null
+    )
+}
