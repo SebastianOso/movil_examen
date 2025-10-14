@@ -1,8 +1,10 @@
 package com.app.movil_examen.di
 
+import com.app.movil_examen.data.local.preferences.CountryPreferences
 import com.app.movil_examen.data.remote.api.CountryApiService
 import com.app.movil_examen.data.repository.CountryRepositoryImpl
 import com.app.movil_examen.domain.repository.CountryRepository
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,10 +28,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideGson(): Gson {
+        return Gson()
+    }
+
+    @Provides
+    @Singleton
     fun provideCountryApiService(retrofit: Retrofit): CountryApiService = retrofit.create(CountryApiService::class.java)
 
     @Provides
     @Singleton
-    fun provideCountryRepository(api: CountryApiService): CountryRepository =
-        CountryRepositoryImpl(api)
+    fun provideCountryRepository(api: CountryApiService,  references: CountryPreferences): CountryRepository =
+        CountryRepositoryImpl(api, references)
 }

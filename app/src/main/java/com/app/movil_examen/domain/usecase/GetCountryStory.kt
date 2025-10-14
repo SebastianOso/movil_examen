@@ -12,11 +12,11 @@ class GetCountryStory
 constructor(
     private val repository: CountryRepository,
 ) {
-    operator fun invoke(id: String): Flow<Result<Country>> =
+    operator fun invoke(name: String): Flow<Result<Country>> =
         flow {
             try {
                 emit(Result.Loading)
-                val movie = repository.getCountryById(id)
+                val movie = repository.getCountryById(name)
                 emit(Result.Success(movie))
             } catch (e: Exception) {
                 emit(Result.Error(e))
