@@ -9,8 +9,9 @@ fun CountryDto.toDomain(): Country =
         name = name.common,
         population = population.toString(),
         region = region,
-        currency = currency.name ?: "Unknown",
-        languages = languages?.values?.joinToString(", ") ?: "Unknown"
+        currency = currencies?.values?.firstOrNull()?.name ?: "Unknown",
+        languages = languages?.values?.joinToString(", ") ?: "Unknown",
+        flag = flags?.png
     )
 
 fun CountriesResponse.toDomain(): Country =
@@ -19,5 +20,6 @@ fun CountriesResponse.toDomain(): Country =
         population = "N/A",
         region = "N/A",
         currency = "N/A",
-        languages = "N/A"
+        languages = "N/A",
+        flag = "N/A"
     )

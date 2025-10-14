@@ -10,9 +10,11 @@ data class CountryDto(
     @SerializedName("region")
     val region: String,
     @SerializedName("currencies")
-    val currency: CurrencyDto,
+    val currencies: Map<String, CurrencyDto>? = null,
     @SerializedName("languages")
     val languages: Map<String, String>? = null,
+    @SerializedName("flags")
+    val flags: FlagsDto? = null,
 ) {
     data class CountryNameDto(
         @SerializedName("common")
@@ -26,5 +28,10 @@ data class CountryDto(
         val symbol: String? = null,
         @SerializedName("name")
         val name: String? = null
+    )
+
+    data class FlagsDto(
+        @SerializedName("png")
+        val png: String? = null
     )
 }

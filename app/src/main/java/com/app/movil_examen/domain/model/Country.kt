@@ -5,5 +5,6 @@ data class Country(
     val population: String,
     val region: String,
     val currency: String,
-    val languages: String
+    val languages: String,
+    val flag: String?,
 )

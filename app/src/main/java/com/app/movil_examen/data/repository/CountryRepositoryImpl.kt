@@ -16,5 +16,9 @@ constructor(
         return response.map { it.toDomain() }
     }
 
-    override suspend fun getCountryById(id: String): Country = api.getCountry(id).toDomain()
+    override suspend fun getCountryById(id: String): Country {
+        val response = api.getCountry(id)
+        return response.firstOrNull()?.toDomain()
+            ?: throw Exception("Country not found")
+    }
 }

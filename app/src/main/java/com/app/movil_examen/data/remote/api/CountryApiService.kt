@@ -12,5 +12,5 @@ interface CountryApiService {
     @GET("name/{name}")
     suspend fun getCountry(
         @Path("name") id: String,
-    ): CountryDto
+    ): List<CountryDto>
 }
